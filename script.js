@@ -22,15 +22,40 @@ numberButton.forEach((button) => {
 })
 
 operatorButton.forEach((button) => {
-    if (button.textContent != "=") {
-        button.addEventListener("click", (event) => {
-            outputDisplay.textContent = "";
-            inputStorage(inputDisplay.textContent, event.target.textContent)
-            outputDisplay.textContent += inputDisplay.textContent + event.target.textContent;
-            inputDisplay.textContent = "";
-        })
-    }
-})
+    button.addEventListener("click", (event) => {
+        inputStorage(inputDisplay.textContent, event.target.textContent)
+        inputOutputToggle(event);
+        if (button.textContent == "=" && typeof firstNumber == "number" && typeof secondNumber == "number") {
+            const result  = operate(firstNumber, secondNumber, operator)
+            outputDisplay.textContent = result
+        } else if (button.textContent == "=" && typeof firstNumber == "number") {
+            outputDisplay.textContent = firstNumber
+        }
+
+    })
+
+    })
+
+// operatorButton.forEach((button) => {
+//     if (button.textContent != "=") {
+//         button.addEventListener("click", (event) => {
+//             outputDisplay.textContent = "";
+//             inputStorage(inputDisplay.textContent, event.target.textContent)
+//             outputDisplay.textContent += inputDisplay.textContent + event.target.textContent;
+//             inputDisplay.textContent = "";
+//         })
+//     } else if (button.textContent == "=") {
+//         button.addEventListener("click", () => {
+
+//         })
+//     }
+// })
+
+function inputOutputToggle(event) {
+    outputDisplay.textContent = "";
+    outputDisplay.textContent += inputDisplay.textContent + event.target.textContent;
+    inputDisplay.textContent = "";
+}
 
 function inputStorage(num, ope) {
     if (firstNumber == "") {
@@ -41,7 +66,10 @@ function inputStorage(num, ope) {
         console.log("Second Number: " + secondNumber)
         console.log("Operator:" + ope)
     }
-    operator = ope;
+
+    if (ope != "=" ) {
+        operator = ope;
+    }
 }
 
 // const operatorButton = document.querySelectorAll(".operator-button-body button")
