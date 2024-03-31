@@ -1,28 +1,42 @@
 
-let firstNumber,
-    secondNumber,
-    operator,
-    userInput;
+let firstNumber = "",
+    secondNumber = "",
+    operator = "",
+    userInput = "";
 
-const displayButton = document.querySelectorAll(".numeric-button-body button, .operator-button-body button");
+const numberButton = document.querySelectorAll(".number-button");
+const operatorButton = document.querySelectorAll(".operator-button");
+const inputDisplay = document.querySelector(".input");
+const outputDisplay = document.querySelector(".output");
 
-displayButton.forEach((button) => {
+
+
+
+numberButton.forEach((button) => {
     button.addEventListener("click", (event) => {
-        let outputDisplay = document.querySelector(".input")
-        outputDisplay.textContent += event.target.textContent;
-        userInput = outputDisplay.textContent
+        inputDisplay.textContent += event.target.textContent;
+        userInput = inputDisplay.textContent
         console.log(userInput)
 
     })
 })
 
-const operatorButton = document.querySelectorAll(".operator-button-body button")
 operatorButton.forEach((button) => {
-    button.addEventListener("click", () => {
-        firstNumber = +userInput.slice(0, userInput.length -1)
-        console.log(firstNumber)
+    console.log(button.textContent)
+    button.addEventListener("click", (event) => {
+        outputDisplay.textContent = "";
+        outputDisplay.textContent += inputDisplay.textContent + event.target.textContent;
+        inputDisplay.textContent = "";
     })
 })
+
+// const operatorButton = document.querySelectorAll(".operator-button-body button")
+// operatorButton.forEach((button) => {
+//     button.addEventListener("click", () => {
+//         firstNumber = +userInput.slice(0, userInput.length -1)
+//         console.log(firstNumber)
+//     })
+// })
 
 let accumlator = 0
 
