@@ -23,17 +23,18 @@ numberButton.forEach((button) => {
 
 operatorButton.forEach((button) => {
     button.addEventListener("click", (event) => {
-        inputStorage(inputDisplay.textContent, event.target.textContent)
-        inputOutputToggle(event);
-        if (typeof firstNumber == "number" && typeof secondNumber == "number") {
-            let result  = operate(firstNumber, secondNumber, operator)
+        if (firstNumber != "" && secondNumber != "") {
+            let result  = operate(Number(firstNumber), Number(secondNumber), operator)
             outputDisplay.textContent = result
             firstNumber = result
             secondNumber = ""
         } else if (button.textContent == "=" && typeof firstNumber == "number") {
             outputDisplay.textContent = firstNumber
         }
-
+        inputStorage(inputDisplay.textContent, event.target.textContent)
+        if (firstNumber != accumlator) {
+            inputOutputToggle(event);
+        }
     })
 
     })
@@ -61,12 +62,16 @@ function inputOutputToggle(event) {
 
 function inputStorage(num, ope) {
     if (firstNumber == "") {
-        firstNumber = Number(num);
-        console.log("First number: " + firstNumber);
-    } else if (typeof firstNumber === "number") {
-        secondNumber = Number(num)
-        console.log("Second Number: " + secondNumber)
+        // firstNumber = Number(num);
+        firstNumber = num;
+        console.log("First number: " + Number(firstNumber));
+    } else if (firstNumber != "") {
+        // secondNumber = Number(num)
+        secondNumber = num
+        console.log("Second Number: " + Number(secondNumber))
         console.log("Operator:" + ope)
+    } else {
+        secondNumber = ""
     }
 
     if (ope != "=" ) {
@@ -120,7 +125,7 @@ function operate(firstNumber, secondNumber, operator) {
     if (operator == "-") {
         return subtract(firstNumber, secondNumber)
     }
-    if (operator == "*") {
+    if (operator == "x") {
         return multiply(firstNumber, secondNumber)
     }
     if (operator == "/") {
