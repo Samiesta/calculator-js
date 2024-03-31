@@ -25,9 +25,11 @@ operatorButton.forEach((button) => {
     button.addEventListener("click", (event) => {
         inputStorage(inputDisplay.textContent, event.target.textContent)
         inputOutputToggle(event);
-        if (button.textContent == "=" && typeof firstNumber == "number" && typeof secondNumber == "number") {
-            const result  = operate(firstNumber, secondNumber, operator)
+        if (typeof firstNumber == "number" && typeof secondNumber == "number") {
+            let result  = operate(firstNumber, secondNumber, operator)
             outputDisplay.textContent = result
+            firstNumber = result
+            secondNumber = ""
         } else if (button.textContent == "=" && typeof firstNumber == "number") {
             outputDisplay.textContent = firstNumber
         }
