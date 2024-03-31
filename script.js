@@ -22,13 +22,27 @@ numberButton.forEach((button) => {
 })
 
 operatorButton.forEach((button) => {
-    console.log(button.textContent)
-    button.addEventListener("click", (event) => {
-        outputDisplay.textContent = "";
-        outputDisplay.textContent += inputDisplay.textContent + event.target.textContent;
-        inputDisplay.textContent = "";
-    })
+    if (button.textContent != "=") {
+        button.addEventListener("click", (event) => {
+            outputDisplay.textContent = "";
+            inputStorage(inputDisplay.textContent, event.target.textContent)
+            outputDisplay.textContent += inputDisplay.textContent + event.target.textContent;
+            inputDisplay.textContent = "";
+        })
+    }
 })
+
+function inputStorage(num, ope) {
+    if (firstNumber == "") {
+        firstNumber = Number(num);
+        console.log("First number: " + firstNumber);
+    } else if (typeof firstNumber === "number") {
+        secondNumber = Number(num)
+        console.log("Second Number: " + secondNumber)
+        console.log("Operator:" + ope)
+    }
+    operator = ope;
+}
 
 // const operatorButton = document.querySelectorAll(".operator-button-body button")
 // operatorButton.forEach((button) => {
