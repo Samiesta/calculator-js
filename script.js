@@ -23,17 +23,24 @@ numberButton.forEach((button) => {
 
 operatorButton.forEach((button) => {
     button.addEventListener("click", (event) => {
+        inputStorage(inputDisplay.textContent, event.target.textContent)
         if (firstNumber != "" && secondNumber != "") {
+            outputDisplay.textContent = ""
+            inputDisplay.textContent = ""
             let result  = operate(Number(firstNumber), Number(secondNumber), operator)
             outputDisplay.textContent = result
+            console.log(result)
             firstNumber = result
             secondNumber = ""
         } else if (button.textContent == "=" && typeof firstNumber == "number") {
             outputDisplay.textContent = firstNumber
         }
-        inputStorage(inputDisplay.textContent, event.target.textContent)
         if (firstNumber != accumlator) {
             inputOutputToggle(event);
+        }
+
+        if (event.target.textContent != "=" ) {
+            operator = event.target.textContent;
         }
     })
 
@@ -74,9 +81,9 @@ function inputStorage(num, ope) {
         secondNumber = ""
     }
 
-    if (ope != "=" ) {
-        operator = ope;
-    }
+    // if (ope != "=" ) {
+    //     operator = ope;
+    // }
 }
 
 // const operatorButton = document.querySelectorAll(".operator-button-body button")
